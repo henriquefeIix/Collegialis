@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/facelets/template.xhtml">
+    <ui:define name="title">Listagem de Reuniões</ui:define>
+    <ui:define name="header">Listagem de Reuniões</ui:define>
+
+    <ui:define name="content">
+        <div class="container-row">
+            <h:panelGroup layout="block" id="reunioes" rendered="#{not empty reuniaoBean.reunioes}">
+                <h:dataTable value="#{reuniaoBean.reunioes}" var="reuniao" styleClass="ui very basic unstackable table">
+                    <h:column>
+                        <h:link outcome="pretty:detalhes-reuniao" styleClass="title item" title="Visualizar">
+                            <i class="search icon"></i>
+                            <f:param name="id" value="#{reuniao.id}" />
+                        </h:link>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Reunião</f:facet>
+                        <h:outputText value="#{reuniao.descricao}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Data</f:facet>
+                        <h:outputText value="#{reuniao.data}">
+                            <f:convertDateTime dataStyle="medium" />
+                        </h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Processos</f:facet>
+                        <h:outputText value="#{fn:length(reuniao.processos)}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Curso</f:facet>
+                        <h:outputText value="#{reuniao.colegiado.curso.descricao}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                        <h:outputText value="#{reuniao.status.descricao}" />
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" id="mensagem" rendered="#{empty reuniaoBean.reunioes}">
+                Nenhum registro de reunião foi encontrado.
+            </h:panelGroup>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

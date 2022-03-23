@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  collegialis-db:
+    image: postgres:9.6.20
+    container_name: collegialis-db
+    ports:
+      - 5432:5432
+    volumes:
+      - "collegialis:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: collegialis
+    restart: always
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    ports:
+      - 9080:8080
+    restart: always
+
+volumes:
+  collegialis:
+    external: true

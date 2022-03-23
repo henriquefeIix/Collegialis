@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/facelets/template.xhtml">
+    <ui:define name="title">Cadastro de Reunião</ui:define>
+    <ui:define name="header">Cadastro de Reunião</ui:define>
+
+    <ui:define name="content">
+        <div class="container-row">
+            <h:form id="cadastro-form" class="ui form">
+                <div class="fields">
+                    <div class="seven wide field">
+                        <div class="ui calendar" id="calendario">
+                            <h:inputText id="data" value="#{reuniaoBean.reuniao.data}" required="true">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                <f:passThroughAttribute name="placeholder" value="Data" />
+                            </h:inputText>
+                        </div>
+                    </div>
+
+                    <div class="nine wide field">
+                        <h:inputText id="descricao" value="#{reuniaoBean.reuniao.descricao}" required="true">
+                            <f:passThroughAttribute name="placeholder" value="Descrição" />
+                        </h:inputText>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <h:selectOneMenu id="colegiado" value="#{reuniaoBean.reuniao.colegiado}" required="true" styleClass="ui fluid dropdown">
+                        <f:converter converterId="ColegiadoConverter" />
+                        <f:selectItem noSelectionOption="true" itemLabel="Colegiado" itemValue="#{null}" />
+                        <f:selectItems value="#{colegiadoBean.colegiados}" var="colegiado" itemLabel="#{colegiado.descricao}" />
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="field">
+                    <h:selectManyListbox id="processos" value="#{reuniaoBean.reuniao.processos}" required="true"
+                        styleClass="ui fluid dropdown">
+                        <f:converter converterId="ProcessoConverter" />
+                        <f:selectItem noSelectionOption="true" itemLabel="Processos" itemValue="#{null}" />
+                        <f:selectItems value="#{processoBean.processos}" var="processo" itemLabel="#{processo.numero}" />
+                    </h:selectManyListbox>
+                </div>
+
+                <div class="ui divider section"></div>
+
+                <div class="btn-container">
+                    <h:commandButton action="#{reuniaoBean.cadastrar}" styleClass="ui button" value="Salvar" />
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

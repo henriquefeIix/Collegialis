@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{processoBean.id}" />
+    <f:viewAction action="#{processoBean.consultar}" />
+</f:metadata>
+
+<ui:composition template="/facelets/template.xhtml">
+    <ui:define name="title">Registro de Parecer</ui:define>
+    <ui:define name="header">Registro de Parecer</ui:define>
+
+    <ui:define name="content">
+        <div class="container-row">
+            <h:panelGroup layout="block" id="processo">
+                <h:panelGrid columns="2" styleClass="ui definition table">
+                    <h:outputText value="Número" />
+                    <h:outputText value="#{processoBean.processo.numero}" />
+
+                    <h:outputText value="Data de Recepção" />
+                    <h:outputText value="#{processoBean.processo.dataRecepcao}">
+                        <f:convertDateTime dateStyle="medium" />
+                    </h:outputText>
+
+                    <h:outputText value="Requisitante" />
+                    <h:outputText value="#{processoBean.processo.requisitante.nome}" />
+
+                    <h:outputText value="Assunto" />
+                    <h:outputText value="#{processoBean.processo.assunto.descricao}" />
+
+                    <h:outputText value="Requerimento" />
+                    <h:outputText value="#{processoBean.processo.requerimento}" />
+                </h:panelGrid>
+            </h:panelGroup>
+        </div>
+
+        <div class="container-row">
+            <div class="ui divider section"></div>
+        </div>
+
+        <div class="container-row">
+            <h:form id="parecer-form" class="ui form">
+                <div class="field">
+                    <h:selectOneMenu value="#{processoBean.processo.decisao}" required="true" styleClass="ui fluid dropdown">
+                        <f:selectItem noSelectionOption="true" itemLabel="Decisão" itemValue="#{null}" />
+                        <f:selectItems value="#{processoBean.decisoes}" var="decisao" itemLabel="#{decisao.descricao}" />
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="field">
+                    <h:inputTextarea value="#{processoBean.processo.parecer}" required="true" rows="4">
+                        <f:passThroughAttribute name="placeholder" value="Parecer" />
+                    </h:inputTextarea>
+                </div>
+
+                <div class="ui divider section"></div>
+
+                <div class="btn-container">
+                    <h:commandButton action="#{processoBean.cadastrar}" styleClass="ui button" value="Salvar" />
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

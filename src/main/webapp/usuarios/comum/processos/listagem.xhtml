@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/facelets/template.xhtml">
+    <ui:define name="title">Listagem de Processos</ui:define>
+    <ui:define name="header">Listagem de Processos</ui:define>
+
+    <ui:define name="content">
+        <div class="container-row">
+            <h:panelGroup layout="block" id="processos" rendered="#{not empty processoBean.processos}">
+                <h:dataTable value="#{processoBean.processos}" var="processo" styleClass="ui very basic unstackable table">
+                    <h:column>
+                        <h:panelGroup rendered="#{usuarioBean.usuario.id eq processo.relator.id}">
+                            <h:link outcome="pretty:parecer-processo" styleClass="title item" title="Parecer">
+                                <i class="edit icon"></i>
+                                <f:param name="id" value="#{processo.id}" />
+                            </h:link>
+                        </h:panelGroup>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Número</f:facet>
+                        <h:outputText value="#{processo.numero}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Requisitante</f:facet>
+                        <h:outputText value="#{processo.requisitante.nome}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Assunto</f:facet>
+                        <h:outputText value="#{processo.assunto.descricao}" />
+                    </h:column>
+
+                    <h:column rendered="#{usuarioBean.usuario.coordenador or usuarioBean.usuario.aluno}">
+                        <f:facet name="header">Relator</f:facet>
+                        <h:outputText value="#{processo.relator.nome}" rendered="#{processo.relator ne null}" />
+                        <h:panelGroup rendered="#{usuarioBean.usuario.coordenador}">
+                            <h:link outcome="pretty:distribuicao-processo" value="Distribuir Processo" rendered="#{processo.relator eq null}">
+                                <f:param name="id" value="#{processo.id}" />
+                            </h:link>
+                        </h:panelGroup>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                        <h:outputText value="#{processo.status.descricao}" />
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" id="mensagem" rendered="#{empty processoBean.processos}">
+                Nenhum registro de processo foi encontrado.
+            </h:panelGroup>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

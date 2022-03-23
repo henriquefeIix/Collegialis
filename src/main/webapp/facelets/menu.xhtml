@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:component>
+    <ui:insert name="menu">
+        <a href="#" class="item collapse-btn">
+            <i class="bars icon"></i>
+        </a>
+        <div class="itens">
+            <h:link outcome="pretty:dashboard" class="item">
+                <i class="home icon"></i> Home
+            </h:link>
+
+            <h:panelGroup layout="block" rendered="#{usuarioBean.usuario.coordenador}">
+                <a href="#" class="item accordion">
+                    <i class="smile icon"></i> Colegiados
+                </a>
+                <div class="content">
+                    <h:link outcome="pretty:cadastro-colegiado" class="item">
+                        <i class="edit icon"></i> Cadastrar
+                    </h:link>
+                    <h:link outcome="pretty:listagem-colegiados" class="item">
+                        <i class="search icon"></i> Visualizar
+                    </h:link>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block">
+                <a href="#" class="item accordion">
+                    <i class="folder open icon"></i> Processos
+                </a>
+                <div class="content">
+                    <h:link outcome="pretty:cadastro-processo" class="item" rendered="#{usuarioBean.usuario.coordenador}">
+                        <i class="edit icon"></i> Cadastrar
+                    </h:link>
+                    <h:link outcome="pretty:listagem-processos" class="item">
+                        <i class="search icon"></i> Visualizar
+                    </h:link>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block">
+                <a href="#" class="item accordion">
+                    <i class="calendar icon"></i> Reuniões
+                </a>
+                <div class="content">
+                    <h:link outcome="pretty:cadastro-reuniao" class="item" rendered="#{usuarioBean.usuario.coordenador}">
+                        <i class="edit icon"></i> Cadastrar
+                    </h:link>
+                    <h:link outcome="pretty:listagem-reunioes" class="item">
+                        <i class="search icon"></i> Visualizar
+                    </h:link>
+                </div>
+            </h:panelGroup>
+
+            <h:link outcome="pretty:logout" class="item">
+                <i class="power off icon"></i> Logout
+            </h:link>
+        </div>
+    </ui:insert>
+</ui:component>
+
+</html>

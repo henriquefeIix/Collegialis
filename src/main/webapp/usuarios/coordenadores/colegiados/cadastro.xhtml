@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/facelets/template.xhtml">
+    <ui:define name="title">Cadastro de Colegiado</ui:define>
+    <ui:define name="header">Cadastro de Colegiado</ui:define>
+
+    <ui:define name="content">
+        <div class="container-row">
+            <h:form id="colegiado-form" styleClass="ui form">
+                <div class="fields">
+                    <div class="nine wide field">
+                        <h:inputText id="descricao" value="#{colegiadoBean.colegiado.descricao}" required="true">
+                            <f:passThroughAttribute name="placeholder" value="Descrição" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="seven wide field">
+                        <h:inputText id="portaria" value="#{colegiadoBean.colegiado.portaria}" required="true">
+                            <f:passThroughAttribute name="placeholder" value="Portaria" />
+                        </h:inputText>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <h:selectOneMenu id="curso" value="#{colegiadoBean.colegiado.curso}" styleClass="ui fluid dropdown" required="true">
+                        <f:converter converterId="CursoConverter" />
+                        <f:selectItem noSelectionOption="true" itemLabel="Curso" itemValue="#{null}" />
+                        <f:selectItems value="#{cursoBean.cursos}" var="curso" itemLabel="#{curso.descricao}" />
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="field">
+                    <h:selectManyMenu id="membros" value="#{colegiadoBean.colegiado.membros}" required="true" styleClass="ui fluid dropdown">
+                        <f:converter converterId="UsuarioConverter" />
+                        <f:selectItem noSelectionOption="true" itemLabel="Membros" itemValue="#{null}" />
+                        <f:selectItems value="#{usuarioBean.usuarios}" var="usuario" itemLabel="#{usuario.nome}" />
+                    </h:selectManyMenu>
+                </div>
+
+                <div class="ui divider section"></div>
+
+                <div class="btn-container">
+                    <h:commandButton action="#{colegiadoBean.cadastrar}" styleClass="ui button" value="Cadastrar" />
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

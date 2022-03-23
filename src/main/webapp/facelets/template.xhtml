@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>
+        <ui:insert name="title">Collegialis</ui:insert>
+    </title>
+    <h:outputStylesheet name="css/template.css" />
+    <h:outputStylesheet name="webjars/fomantic-ui/dist/semantic.css" />
+</h:head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <ui:insert name="sidebar">
+                <ui:include src="menu.xhtml" />
+            </ui:insert>
+        </div>
+
+        <div class="content-container">
+            <div class="container-row">
+                <h2 class="ui center aligned icon header">
+                    <i class="circular users icon"></i>
+                    <ui:insert name="header">Título da Página</ui:insert>
+                </h2>
+            </div>
+
+            <div class="container-row">
+                <div class="ui header divider section"></div>
+            </div>
+
+            <ui:insert name="content">
+                <ui:include src="content.xhtml" />
+            </ui:insert>
+        </div>
+    </div>
+
+    <h:outputScript name="webjars/jquery/dist/jquery.js" />
+    <h:outputScript name="webjars/fomantic-ui/dist/semantic.js" />
+    <h:outputScript name="js/template.js" />
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+    xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.0 http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.0.xsd">
+
+    <url-mapping id="login">
+        <pattern value="/" />
+        <view-id value="/index.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="dashboard">
+        <pattern value="/usuarios/dashboard" />
+        <view-id value="/usuarios/dashboard.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="cadastro-processo">
+        <pattern value="/usuarios/coordenadores/processos/cadastro" />
+        <view-id value="/usuarios/coordenadores/processos/cadastro.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="edicao-processo">
+        <pattern value="/usuarios/coordenadores/processos/edicao/#{id}" />
+        <view-id value="/usuarios/coordenadores/processos/cadastro.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="listagem-processos">
+        <pattern value="/usuarios/comum/processos" />
+        <view-id value="/usuarios/comum/processos/listagem.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="distribuicao-processo">
+        <pattern value="/usuarios/coordenadores/processos/distribuicao/#{id}" />
+        <view-id value="/usuarios/coordenadores/processos/distribuicao.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="parecer-processo">
+        <pattern value="/usuarios/professores/processos/parecer/#{id}" />
+        <view-id value="/usuarios/professores/processos/parecer.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="listagem-colegiados">
+        <pattern value="/usuarios/coordenadores/colegiados" />
+        <view-id value="/usuarios/coordenadores/colegiados/listagem.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="cadastro-colegiado">
+        <pattern value="/usuarios/coordenadores/colegiados/cadastro" />
+        <view-id value="/usuarios/coordenadores/colegiados/cadastro.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="finalizar-colegiado">
+        <pattern value="/usuarios/coordenadores/colegiados/finalizar/#{id: colegiadoBean.id}" />
+        <view-id value="/usuarios/coordenadores/colegiados/listagem.xhtml" />
+        <action>#{colegiadoBean.finalizar}</action>
+    </url-mapping>
+    
+    <url-mapping id="listagem-reunioes">
+        <pattern value="/usuarios/comum/reunioes" />
+        <view-id value="/usuarios/comum/reunioes/listagem.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="cadastro-reuniao">
+        <pattern value="/usuarios/coordenadores/reunioes/cadastro" />
+        <view-id value="/usuarios/coordenadores/reunioes/cadastro.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="detalhes-reuniao">
+        <pattern value="/usuarios/comum/reunioes/detalhes/#{id}" />
+        <view-id value="/usuarios/comum/reunioes/detalhes.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="logout">
+        <pattern value="/logout" />
+        <view-id value="/index.xhtml" />
+        <action>#{usuarioBean.logout}</action>
+    </url-mapping>
+
+</pretty-config>

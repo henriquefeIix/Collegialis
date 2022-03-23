@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{processoBean.id}" required="#{not facesContext.postback}" />
+    <f:viewAction action="#{processoBean.consultar}" />
+</f:metadata>
+
+<ui:composition template="/facelets/template.xhtml">
+    <ui:define name="title">Cadastro de Processo</ui:define>
+    <ui:define name="header">Cadastro de Processo</ui:define>
+
+    <ui:define name="content">
+        <div class="container-row">
+            <h:form id="processo-form" styleClass="ui form">
+                <div class="fields">
+                    <div class="seven wide field">
+                        <h:inputText id="numero" value="#{processoBean.processo.numero}" required="true">
+                            <f:passThroughAttribute name="placeholder" value="Número" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="nine wide field">
+                        <h:selectOneMenu id="requisitante" value="#{processoBean.processo.requisitante}" required="true" styleClass="ui fluid dropdown">
+                            <f:converter converterId="AlunoConverter" />
+                            <f:selectItem noSelectionOption="true" itemLabel="Requisitante" itemValue="#{null}" />
+                            <f:selectItems value="#{alunoBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <h:selectOneMenu id="assunto" value="#{processoBean.processo.assunto}" required="true" styleClass="ui fluid dropdown">
+                        <f:converter converterId="AssuntoConverter" />
+                        <f:selectItem noSelectionOption="true" itemLabel="Assunto" itemValue="#{null}" />
+                        <f:selectItems value="#{assuntoBean.assuntos}" var="assunto" itemLabel="#{assunto.descricao}" />
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="field">
+                    <h:inputTextarea id="requerimento" value="#{processoBean.processo.requerimento}" required="true" rows="4">
+                        <f:passThroughAttribute name="placeholder" value="Requerimento" />
+                    </h:inputTextarea>
+                </div>
+
+                <div class="ui divider section"></div>
+
+                <div class="btn-container">
+                    <h:commandButton id="processo-btn" action="#{processoBean.cadastrar}" styleClass="ui button" value="Cadastrar" />
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

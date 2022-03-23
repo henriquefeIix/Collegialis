@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Login</title>
+    <h:outputStylesheet name="webjars/fomantic-ui/dist/semantic.css" />
+    <h:outputStylesheet name="css/index.css" />
+</h:head>
+<h:body>
+    <div class="wrapper">
+        <div class="form-container">
+            <h:form id="login-form" styleClass="ui form">
+                <div class="field">
+                    <h:inputText id="login" value="#{usuarioBean.user}" required="true" requiredMessage="O campo de matrícula é obrigatório.">
+                        <f:passThroughAttribute name="placeholder" value="Login" />
+                    </h:inputText>
+                </div>
+
+                <div class="field">
+                    <h:inputSecret id="senha" value="#{usuarioBean.senha}" required="true" requiredMessage="O campo de senha é obrigatório.">
+                        <f:passThroughAttribute name="placeholder" value="Senha" />
+                    </h:inputSecret>
+                </div>
+                <h:commandButton id="login-btn" action="#{usuarioBean.login}" class="fluid ui button" value="Login" />
+            </h:form>
+        </div>
+
+        <div class="info-container">
+            Não tem conta? <a href="#">Solicite a criação.</a>
+        </div>
+
+        <h:messages class="message-container" />
+    </div>
+</h:body>
+
+</html>
